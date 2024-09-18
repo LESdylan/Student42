@@ -13,34 +13,34 @@ Libft consists of a variety of functions grouped by their purpose:
 1. **Memory Functions**
 These functions are used to manipulate blocks of memory, allowing operations like copying, moving, or setting values in memory.
 
-`memset`: Fill memory with a constant byte.
-`bzero`: Set all bytes in a block of memory to zero.
-`memcpy`: Copy memory from one location to another.
-`memccpy`: Copy memory until a specific character is found.
-`memmove`: Copy memory between potentially overlapping memory blocks.
-`memchr`: Find the first occurrence of a character in a memory block.
+- `memset`: Fill memory with a constant byte.
+- `bzero`: Set all bytes in a block of memory to zero.
+- `memcpy`: Copy memory from one location to another.
+- `memccpy`: Copy memory until a specific character is found.
+- `memmove`: Copy memory between potentially overlapping memory blocks.
+- `memchr`: Find the first occurrence of a character in a memory block.
 `memcmp`: Compare two blocks of memory.
 
 2. **String Functions**
 These functions allow manipulation and examination of C-style strings (null-terminated arrays of characters).
 
-`strlen`: Calculate the length of a string.
-`strchr`: Locate the first occurrence of a character in a string.
-`strrchr`: Locate the last occurrence of a character in a string.
-`strncmp`: Compare two strings up to a specified number of characters.
-`strlcpy`: Copy a string to a buffer, ensuring it is null-terminated.
-`strlcat`: Concatenate two strings, ensuring the result fits within a buffer.
+- `strlen`: Calculate the length of a string.
+- `strchr`: Locate the first occurrence of a character in a string.
+- `strrchr`: Locate the last occurrence of a character in a string.
+- `strncmp`: Compare two strings up to a specified number of characters.
+- `strlcpy`: Copy a string to a buffer, ensuring it is null-terminated.
+- `strlcat`: Concatenate two strings, ensuring the result fits within a buffer.
 
 3. **Character Checking Functions**
 These functions check if a character meets certain conditions, such as being alphabetic or numeric.
 
-`isalpha`: Check if a character is an alphabetic letter.
-`isdigit`: Check if a character is a digit.
-`isalnum`: Check if a character is alphanumeric.
-`isascii`: Check if a character is an ASCII character.
-`isprint`: Check if a character is printable.
-`toupper`: Convert a lowercase character to uppercase.
-`tolower`: Convert an uppercase character to lowercase.
+- `isalpha`: Check if a character is an alphabetic letter.
+- `isdigit`: Check if a character is a digit.
+- `isalnum`: Check if a character is alphanumeric.
+- `isascii`: Check if a character is an ASCII character.
+- `isprint`: Check if a character is printable.
+- `toupper`: Convert a lowercase character to uppercase.
+- `tolower`: Convert an uppercase character to lowercase.
 
 4. **Conversion Functions**
 These functions are used to convert strings to other data types.
