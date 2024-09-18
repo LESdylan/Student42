@@ -45,7 +45,7 @@ These functions check if a character meets certain conditions, such as being alp
 4. **Conversion Functions**
 These functions are used to convert strings to other data types.
 
-`atoi`: Convert a string to an integer.
+- `atoi`: Convert a string to an integer.
 
 5. **The Static Library (libft.a)**
 After implementing all the functions, they are compiled and archived into a static library file called libft.a. This library can be linked with future C projects to reuse the custom functions.
