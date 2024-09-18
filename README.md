@@ -1,5 +1,5 @@
 # Welcome to My 42 Journey! 🚀
-Hello, and welcome to my GitHub! 👋
+Hello, and welcome to my GitHub(**still building it**)! 👋
 
 I'm a student at 42 School, a unique coding program that fosters self-learning, collaboration, and problem-solving in an exciting and fast-paced environment. In this repository, you'll find a collection of projects, resources, and tips that I’ve discovered and found incredibly helpful throughout my journey at 42. The goal is to share what has helped me survive (and thrive!) in this challenging, yet rewarding, program with others.
 
