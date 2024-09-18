@@ -14,17 +14,11 @@ Libft consists of a variety of functions grouped by their purpose:
 These functions are used to manipulate blocks of memory, allowing operations like copying, moving, or setting values in memory.
 
 `memset`: Fill memory with a constant byte.
-
 `bzero`: Set all bytes in a block of memory to zero.
-
 `memcpy`: Copy memory from one location to another.
-
 `memccpy`: Copy memory until a specific character is found.
-
 `memmove`: Copy memory between potentially overlapping memory blocks.
-
 `memchr`: Find the first occurrence of a character in a memory block.
-
 `memcmp`: Compare two blocks of memory.
 
 2. **String Functions**
