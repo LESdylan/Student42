@@ -6,7 +6,13 @@
 /*   By: dylan-soul <dylan-soul@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:06:43 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/09/18 17:06:44 by dylan-soul       ###   ########.fr       */
+/*   Updated: 2024/09/19 16:15:25 by dylan-soul       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_isprint(int c)
+{
+	if (c >= 0x20 && c <= 0x7E)
+		return (1);
+	return (0);
+}

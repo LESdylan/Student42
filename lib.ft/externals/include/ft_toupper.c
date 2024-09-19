@@ -6,7 +6,13 @@
 /*   By: dylan-soul <dylan-soul@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:07:20 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/09/18 17:07:21 by dylan-soul       ###   ########.fr       */
+/*   Updated: 2024/09/19 16:29:29 by dylan-soul       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_toupper(int c)
+{
+	if (c >= 0x61 && c <= 0x7a)
+		return (c - 32);
+	return (c);
+}
