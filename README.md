@@ -7,7 +7,7 @@ I'm a student at 42 School, a unique coding program that fosters self-learning, 
 I'm passionate about coding, technology, and continuously improving myself through hands-on projects. At 42, we face complex problems that require persistence, creativity, and strong logic. This experience has not only sharpened my technical skills but also my ability to learn independently and adapt to new situations.
 |link|description|
 | -|-|
-|[myNotion](https://puzzled-basil-cc8.notion.site/e743d7995e2a42b6984afa27a7608b0e?v=ddb9f1bff26241fea260b8066eaf2636)|you will be able to see all my thinkings in a really well organized notion to help :smile:|
+|[myNotion](https://puzzled-basil-cc8.notion.site/My-journey-12b52b56821880698ef6f24ca3a63fc0)|you will be able to see all my thinkings in a really well organized notion to help :smile:|
 
 ## What to Expect Here
 In this space, you’ll find a variety of resources and materials that cover topics and skills crucial to surviving (and succeeding) as a 42 student. I'll be sharing:
