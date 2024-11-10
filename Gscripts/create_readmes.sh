@@ -3,7 +3,7 @@
 # Set the root directory (you can replace "." with a specific path if needed)
 echo "Enter the path within you want to generate all the README file : "
 read dir
-ROOT_DIR= "$dir"
+ROOT_DIR="$dir"
 
 # Loop through all directories in the root directory
 for dir in "$ROOT_DIR"/*/; do
