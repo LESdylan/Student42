@@ -1,0 +1,1 @@
+#script to automatize all the test directly

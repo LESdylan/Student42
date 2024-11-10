@@ -1,0 +1,1 @@
+details on on the way how to configurate the project on different platforms.
