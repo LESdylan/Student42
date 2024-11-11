@@ -24,8 +24,8 @@ main() {
     # Ensure the output directory exists
     mkdir -p "$output_dir"
 
-    # Compile the source file
-    gcc -o "$output" -Wall -Werror -Wextra "$src_path"
+    # Compile the source file and link the math library
+    gcc -o "$output" -Wall -Werror -Wextra "$src_path" -lm
 
     # Check if compilation was successful
     if [[ $? -ne 0 ]]; then
