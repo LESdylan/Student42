@@ -6,29 +6,44 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:07:01 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/11/11 14:57:32 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/11/11 23:12:44 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <ctype.h>
+#include <ctype.h> // pour isalpha
 
 int ft_count_word(char *str)
 {
-    int new_word = 0;
+    int in_word = 0;
     int count = 0;
-    while(*str != '\0')
+
+    while (*str != '\0')
     {
-        if(isalpha(*str))
+        if (isalpha(*str))
         {
-            if (new_word == 0)
+            if (in_word == 0)
             {
                 count++;
-                new_word = 1;
+                in_word = 1;
             }
-        } else 
+        }
+        else if (*str == '\'' || *str == '-' || *str == '_')
         {
-            new_word = 0;
+            // Vérifier si la ponctuation est suivie d'une lettre pour la traiter comme un mot
+            if (isalpha(*(str + 1)))
+            {
+                str++;
+                continue;
+            }
+            else
+            {
+                in_word = 0; // Ne pas compter comme mot si non suivi d'une lettre
+            }
+        }
+        else
+        {
+            in_word = 0; // Autre ponctuation ou espace
         }
         str++;
     }
@@ -37,7 +52,7 @@ int ft_count_word(char *str)
 
 int main()
 {
-    char *text = "Hello, world! This is a test .";
+    char *text = "Congratulations! Today is your day. You're -  ' off-track to Great Places! You're off and away!";
     printf("number fo words : %d\n", ft_count_word(text));
     return  0;
 }

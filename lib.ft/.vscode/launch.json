@@ -8,7 +8,7 @@
                 "name": "Debug C",
                 "type": "cppdbg",
                 "request": "launch",
-                "program": "${workspaceFolder}/readability",  // Changez le nom de votre exécutable si nécessaire
+                "program": "/home/dyl-syzygy/Student42/lib.ft/exp/readability",  // Changez le nom de votre exécutable si nécessaire
                 "args": [],
                 "stopAtEntry": false,
                 "cwd": "${workspaceFolder}",

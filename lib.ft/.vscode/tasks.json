@@ -8,10 +8,10 @@
                 "type": "shell",
                 "command": "/usr/bin/gcc",
                 "args": [
-                    "-g",               // Pour activer le débogage avec les informations de source
+                    "-g",              // Pour activer le débogage avec les informations de source
                     "${file}",
                     "-o",
-                    "${fileDirname}/a.out"
+                    "${fileDirname}/readability"
                 ],
                 "group": {
                     "kind": "build",
