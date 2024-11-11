@@ -53,3 +53,6 @@ delexp:
 # Run the script with the proper parameters
 run: compile
 	/home/dyl-syzygy/Student42/lib.ft/exp/$(SRC_FILENAME)
+
+push:
+	git add . ; git commit -m "updated"; git push
