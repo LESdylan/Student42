@@ -1,62 +1,97 @@
-#include <stdio.h>
-#include <string.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-// Prototypes
+#define BUFFER_SIZE 500
+
+// Structure to store analysis data
+typedef struct
+{
+    unsigned int letter_count;
+    unsigned int word_count;
+    unsigned int sentence_count;
+    float L;
+    float S;
+} TextAnalysis;
+
+unsigned int ft_strlen(const char *str);
 unsigned int ft_isalpha(int c);
 unsigned int ft_count_letters(const char *s);
 unsigned int ft_count_words(const char *s);
 unsigned int ft_count_sentences(const char *s);
-float calculate_L(const char *s);
-float calculate_S(const char *s);
+float calculate_L(unsigned int letters, unsigned int words);
+float calculate_S(unsigned int sentences, unsigned int words);
 int compute_coleman_liau_index(float L, float S);
+size_t ft_strcspn(const char *s, const char *reject);
+
+TextAnalysis analyze_text(const char *text);
 
 int main()
 {
-    char input[500];
+    char *input = (char *) malloc(BUFFER_SIZE * sizeof(char));
+    if (input == NULL)
+    {
+        fprintf(stderr, "Error: Memory allocation failed.\n");
+        return 1;
+    }
 
-    while(1)
+    while (1)
     {
         printf("Text: ");
-        fgets(input, sizeof(input), stdin);
-
-        // Enlever le caractère de nouvelle ligne ajouté par fgets
-        input[strcspn(input, "\n")] = 0;
-
-        if (strlen(input) == 0)
+        if (fgets(input, BUFFER_SIZE, stdin) == NULL)
         {
-            fprintf(stderr, "Error: No text provided. Please enter a valid text.\n");
-            continue;  // Demander à l'utilisateur d'entrer du texte à nouveau
+            fprintf(stderr, "Error: Failed to read input.\n");
+            free(input);
+            return 1;
         }
 
-        // Calcul des moyennes L et S
-        float L = calculate_L(input);
-        float S = calculate_S(input);
+        input[ft_strcspn(input, "\n")] = 0;
 
-        // Calcul de l'index de lisibilité
-        int grade_level = compute_coleman_liau_index(L, S);
+        if (ft_strlen(input) == 0)
+        {
+            fprintf(stderr, "Error: No text provided. Please enter a valid text.\n");
+            continue;
+        }
 
-        // Affichage du niveau de lisibilité
+        TextAnalysis analysis = analyze_text(input);
+        int grade_level = compute_coleman_liau_index(analysis.L, analysis.S);
+
         if (grade_level < 1)
             printf("Before Grade 1\n");
         else if (grade_level >= 16)
             printf("Grade 16+\n");
         else
-            printf("Grade Level: %d\n", grade_level);
+            printf("Grade %d\n", grade_level);
 
-        break;  // Sortir de la boucle après avoir effectué le calcul
+        break;
     }
 
+    free(input);
+    input = NULL; // Set to NULL after freeing memory.
     return 0;
 }
-// Calcul de l'index de lisibilité
-int compute_coleman_liau_index(float L, float S)
+
+TextAnalysis analyze_text(const char *text)
 {
-    float index = 0.0588 * L - 0.296 * S - 15.8;
-    return (int)round(index);
+    TextAnalysis analysis;
+    analysis.letter_count = ft_count_letters(text);
+    analysis.word_count = ft_count_words(text);
+    analysis.sentence_count = ft_count_sentences(text);
+    analysis.L = calculate_L(analysis.letter_count, analysis.word_count);
+    analysis.S = calculate_S(analysis.sentence_count, analysis.word_count);
+    return analysis;
 }
 
-// Compte le nombre de lettres
+int compute_coleman_liau_index(float L, float S)
+{
+    return (int) round((0.0588 * L) - (0.296 * S) - 15.8);
+}
+
+unsigned int ft_isalpha(int c)
+{
+    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
 unsigned int ft_count_letters(const char *s)
 {
     int count = 0;
@@ -69,21 +104,14 @@ unsigned int ft_count_letters(const char *s)
     return count;
 }
 
-// Vérifie si un caractère est alphabétique
-unsigned int ft_isalpha(int c)
+unsigned int ft_count_words(const char *str)
 {
-    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
-}
-
-// Compte le nombre de mots
-unsigned int ft_count_words(const char *s)
-{
-    int count = 0;
     int in_word = 0;
+    int count = 0;
 
-    while (*s != '\0')
+    while (*str != '\0')
     {
-        if (ft_isalpha(*s))
+        if (ft_isalpha(*str))
         {
             if (in_word == 0)
             {
@@ -91,16 +119,27 @@ unsigned int ft_count_words(const char *s)
                 in_word = 1;
             }
         }
+        else if (*str == '\'' || *str == '-' || *str == '_')
+        {
+            if (ft_isalpha(*(str + 1)))
+            {
+                str++;
+                continue;
+            }
+            else
+            {
+                in_word = 0;
+            }
+        }
         else
         {
             in_word = 0;
         }
-        s++;
+        str++;
     }
     return count;
 }
 
-// Compte le nombre de phrases
 unsigned int ft_count_sentences(const char *s)
 {
     int count = 0;
@@ -113,32 +152,49 @@ unsigned int ft_count_sentences(const char *s)
     return count;
 }
 
-// Calcul de la moyenne des lettres par 100 mots
-float calculate_L(const char *s)
+float calculate_L(unsigned int letters, unsigned int words)
 {
-    int letters = ft_count_letters(s);
-    int words = ft_count_words(s);
-
-    // Gestion d'erreur: éviter la division par zéro si aucun mot n'est trouvé
-    if (words == 0) {
-        fprintf(stderr, "Erreur: Aucun mot trouvé dans le texte.\n");
-        return 0;  // Retourne 0 pour éviter une division par zéro
+    if (words == 0)
+    {
+        fprintf(stderr, "Error: No words found in the text.\n");
+        return 0;
     }
-
-    return (float)letters / words * 100;
+    return ((float) letters / words) * 100;
 }
 
-// Calcul de la moyenne des phrases par 100 mots
-float calculate_S(const char *s)
+float calculate_S(unsigned int sentences, unsigned int words)
 {
-    int sentences = ft_count_sentences(s);
-    int words = ft_count_words(s);
-
-    // Gestion d'erreur: éviter la division par zéro si aucun mot n'est trouvé
-    if (words == 0) {
-        fprintf(stderr, "Erreur: Aucun mot trouvé dans le texte.\n");
-        return 0;  // Retourne 0 pour éviter une division par zéro
+    if (words == 0)
+    {
+        fprintf(stderr, "Error: No words found in the text.\n");
+        return 0;
     }
+    return ((float) sentences / words) * 100;
+}
 
-    return (float)sentences / words * 100;
+unsigned int ft_strlen(const char *s)
+{
+    unsigned int i = 0;
+    while (s[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+
+size_t ft_strcspn(const char *s, const char *reject)
+{
+    size_t i = 0;
+    while (s[i] != '\0')
+    {
+        for (const char *r = reject; *r != '\0'; r++)
+        {
+            if (s[i] == *r)
+            {
+                return i;
+            }
+        }
+        i++;
+    }
+    return i;
 }
