@@ -2,4 +2,4 @@ a.out
 *.o
 obj/
 exp/
-.vscode/
+*vscode/
