@@ -6,11 +6,13 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:06:25 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/11/26 14:06:56 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/11/26 16:49:52 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 //TODO: maybe verify if the string contain alphabetic character so the algorithm can ignore it
 int	ft_atoi(const char *nptr)
 {
@@ -40,14 +42,23 @@ int	ft_atoi(const char *nptr)
 	return (res);
 }
 
-int	ft_recursive_atoi(char *str)
-{
-	
+int atoi_recursive(const char *str) {
+    // Cas de base : chaîne vide ou fin de chaîne
+    if (*str == '\0') {
+        return 0;
+    }
+
+    // Appel récursif pour le reste de la chaîne
+    int result = atoi_recursive(str + 1);
+
+    // Convertit le caractère actuel en chiffre et ajuste son poids
+    return (*str - '0') * pow(10, strlen(str) - 1) + result;
 }
+
 
 int main(void)
 {
 	printf("%d\n",ft_atoi("1245"));
-	printf("%d\n",ft_recusrive_atoi("1245"));
+	printf("%d\n",atoi_recursive("1245455"));
 	return 0;
 }
