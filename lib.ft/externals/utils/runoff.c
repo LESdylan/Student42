@@ -6,7 +6,7 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:53:16 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/11/25 16:57:30 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/11/25 17:09:38 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct runoff
 } candidate;
 
 candidate candidates[MAX_CANDIDATES];
-
+int voted_candidates[MAX_VOTERS][MAX_CANDIDATES] = {0};
 int voters_count;
 int candidates_count;
 
@@ -58,7 +58,6 @@ int is_tie(int min);
    
 int main(int argc, char *argv[])
 {
-    
     //variables declarations
     int i,rank;
     //initialization of variables
@@ -129,29 +128,69 @@ int main(int argc, char *argv[])
     * @brief The function should update the number of `votes` each candidates has at his stage in the runoff
     * @attention at each stage in the runoff, every voter effectively votes for their top-preferres candidate who has not already been eliminated
     * voters_count stores the number oof voters in the election and that, for each voter in our election, we want to count one ballot.
-    * 
     */
-void tabulates(void)
-{
-   
-    return;
-}
+    void tabulates(void)
+    {
+        // Remet les votes à zéro au début de chaque tour
+        for (int i = 0; i < candidates_count; i++)
+        {
+            candidates[i].vote = 0;
+        }
+    
+        // Parcourt tous les votants pour ajouter des votes à leurs choix préférés
+        for (int i = 0; i < voters_count; i++)
+        {
+            // Trouver le premier candidat non éliminé pour ce votant
+            for (int rank = 0; rank < candidates_count; rank++)
+            {
+                int candidate_index = vote(i, rank, "name");  // Cette fonction devra mettre à jour les préférences
+                if (candidate_index != -1 && candidates[candidate_index].eliminated == 0)
+                {
+                    candidates[candidate_index].vote++;
+                    break;  // Stoppe dès qu'on trouve un candidat valide
+                }
+            }
+        }
+    }
 
 
 
 /**
- * @param voter
- * @param rank
- * @param name
+ * @param voter id of the voter
+ * @param rank  rank of vote
+ * @param name  name of candidate
+ * @return `0|1` 0 if preference is successfully recorded | 0 otherwise.
  * @note 
  * if `name` is a match for the name  of a valid candidate, then you should update the globale preferences array to indicate that the `voter`
  * has that `candidate` as their `rank` preference. 
  * `0` is the first preference, `1` is the second preference, etc..
+ * @example
+ * !if the name is not one of the candidate, vote can't be processed
  */
+int voted_candidates[MAX_VOTERS][MAX_CANDIDATES] = {0}; // tableau pour chaque électeur et ses votes
+
 int vote(int voter, int rank, char *name)
 {
-    return;
+    for (int i = 0; i < candidates_count; i++)
+    {
+        if (strcmp(candidates[i].name, name) == 0 && candidates[i].eliminated == 0)
+        {
+            if (voted_candidates[voter][i] == 0)  // Vérifier si ce candidat a déjà été voté par cet électeur
+            {
+                preferences[voter][rank] = i;  // Stocke le vote
+                voted_candidates[voter][i] = 1;  // Marque ce candidat comme voté
+                return 1;
+            }
+            else
+            {
+                printf("Vous ne pouvez pas voter deux fois pour le même candidat !\n");
+                return 0;
+            }
+        }
+    }
+    return 0;  // Si le nom n'est pas valide ou le candidat est éliminé
 }
+
 //*print the min_values' index to manipulate the list and declare a loser
 
 //? RETRIEVE INFORMATION ABOUT THE VOTE
@@ -162,18 +201,43 @@ int vote(int voter, int rank, char *name)
  */
 int print_winner(void)
 {
-    return 0;
+    for (int i = 0; i < candidates_count; i++)
+    {
+        if (candidates[i].vote > voters_count / 2)
+        {
+            printf("Le gagnant est %s avec %d votes !\n", candidates[i].name, candidates[i].vote);
+            return 1;  // Un gagnant est trouvé
+        }
+    }
+    return 0;  // Aucun gagnant
 }
+
 
 /**
  * @param void
  * @return the minimum vote total for any candidate who is still in the election
- * 
  */
 int find_min(void)
 {
+    int min_votes = -1;  // Initialiser avec une valeur arbitraire, car les votes ne peuvent pas être négatifs.
+
+    // Parcours de tous les candidats
+    for (int i = 0; i < candidates_count; i++)
+    {
+        // On ignore les candidats éliminés
+        if (candidates[i].eliminated == 0)
+        {
+            // Si c'est le premier candidat ou que ce candidat a moins de votes
+            if (min_votes == -1 || candidates[i].vote < min_votes)
+            {
+                min_votes = candidates[i].vote;
+            }
+        }
+    }
     
+    return min_votes;
 }
+
 
 /**
  * The function takes an argument min, which will be the minimum number of votes that anyone in the election currently has.
@@ -209,7 +273,13 @@ int min_value(int arr[], int n)
  */
 void eliminate(int min)
 {
-    return;
+    for (int i = 0; i < candidates_count; i++)
+    {
+        if (candidates[i].vote == min)
+        {
+            candidates[i].eliminated = 1;  // Marque ce candidat comme éliminé
+        }
+    }
 }
 //*eliminate the candidate (or candidates) in last place
 
@@ -230,5 +300,14 @@ int is_valid_vote(char *name)
 
 int is_tie(int min)
 {
-    return 0;
+    // On parcourt tous les candidats
+    for (int i = 0; i < candidates_count; i++)
+    {
+        // Si le candidat n'est pas éliminé et n'a pas exactement `min` votes
+        if (candidates[i].eliminated == 0 && candidates[i].vote != min)
+        {
+            return 0;  // Ce n'est pas une égalité
+        }
+    }
+    return 1;  // Tous les candidats restants ont le même nombre de votes
 }
