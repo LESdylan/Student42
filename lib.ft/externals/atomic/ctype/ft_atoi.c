@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dylan-soul <dylan-soul@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:06:25 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/09/19 16:27:06 by dylan-soul       ###   ########.fr       */
+/*   Updated: 2024/11/26 14:06:56 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+//TODO: maybe verify if the string contain alphabetic character so the algorithm can ignore it
 int	ft_atoi(const char *nptr)
 {
 	int	res;
@@ -36,4 +38,16 @@ int	ft_atoi(const char *nptr)
 	if (sign_count % 2 == 1)
 		res *= -1;
 	return (res);
+}
+
+int	ft_recursive_atoi(char *str)
+{
+	
+}
+
+int main(void)
+{
+	printf("%d\n",ft_atoi("1245"));
+	printf("%d\n",ft_recusrive_atoi("1245"));
+	return 0;
 }
