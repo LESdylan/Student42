@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_size.c                                     :+:      :+:    :+:   */
+/*   btree_create_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 15:36:02 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/12/10 16:33:49 by dyl-syzygy       ###   ########.fr       */
+/*   Created: 2024/12/10 16:56:20 by dyl-syzygy        #+#    #+#             */
+/*   Updated: 2024/12/10 17:34:41 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_list.h"
-#include <stdio.h>
-int ft_list_size(t_list *begin_list) {
-    int count = 0;
-    t_list *current = begin_list;
+#include "ft_btree.h"
 
-    while (current != NULL) {
-        count++;
-        current = current->next;
+t_btree *btree_create_node(void *item) {
+    // Allocate memory for a new node
+    t_btree *node = (t_btree *)malloc(sizeof(t_btree));
+    if (!node) {
+        return NULL; // Allocation failed
     }
 
-    return count;
+    // Initialize the node's fields
+    node->item = item;
+    node->left = NULL;
+    node->right = NULL;
+
+    return node; // Return the address of the new node
 }

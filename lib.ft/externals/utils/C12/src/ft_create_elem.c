@@ -6,15 +6,13 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:04:11 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/12/10 15:27:17 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/12/10 16:00:26 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 #include <stdio.h>
-// Function to create a new element in the linked list
-#include "ft_list.h"
-#include <stdlib.h>
+// Function to create a new element in the linked lis
 
 // Function to create a new list element
 t_list *ft_create_elem(void *data) {
