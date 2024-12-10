@@ -6,7 +6,7 @@ LDFLAGS = -lm # Lien avec la bibliothèque mathématique
 # Source directories and object directory
 SRC_DIRS = ctype list string memory io
 OBJ_DIR = obj
-
+MSG = "updated";
 # Automatically detect all source files
 SRC = $(wildcard $(addprefix $(SRC_DIRS)/, *.c)) $(wildcard $(addprefix $(SRC_DIRS)/, *.c))
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -60,7 +60,7 @@ run: compile
 
 # Push changes to the git repository
 push:
-	git add . ; git commit -m "updated"; git push
+	git add . ; git commit -m "$(MSG)"; git push
 
 # Debugging: Start GDB with the target executable
 debug: $(TARGET)

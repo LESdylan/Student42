@@ -6,20 +6,23 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:07:08 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/11/12 00:03:45 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/12/10 11:47:29 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
-int	ft_strlen(const char *s) 
-{ 
-	int i = 0; 
-	while (*(s + i++) != '\0'); 
-	return (i-1); 
+
+size_t ft_strlen(const char *str) {
+    size_t length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
 }
 
-int main()
-{
-	printf("\n%d\n",ft_strlen("hello"));
+// Test function
+int main() {
+    const char *str = "Hello, World!";
+    printf("Length of string: %zu\n", ft_strlen(str));
+    return 0;
 }

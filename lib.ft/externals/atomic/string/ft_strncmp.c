@@ -3,28 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dylan-soul <dylan-soul@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:07:11 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/09/21 00:56:58 by dylan-soul       ###   ########.fr       */
+/*   Updated: 2024/12/10 11:47:43 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
+int ft_strncmp(const char *s1, const char *s2, size_t n) {
+    while (n-- && *s1 && (*s1 == *s2)) {
+        s1++;
+        s2++;
+    }
+    return (n == (size_t)-1) ? 0 : *(unsigned char *)s1 - *(unsigned char *)s2;
+}
 
-	i = 0;
-	while (*(s1 + i) != '\0' && *(s2 + i) != '\0' && i < n)
-	{
-		if (*(s1 + i) != *(s2 + i))
-		{
-			return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
-		}
-		i++;
-	}
-	if (i < n)
-		return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
+// Test function
+int main() {
+    const char *str1 = "Hello, World!";
+    const char *str2 = "Hello, World!";
+    
+    if (ft_strncmp(str1, str2, 5) == 0) {
+        printf("First 5 characters are equal\n");
+    } else {
+        printf("First 5 characters are not equal\n");
+    }
+
+    return 0;
 }
