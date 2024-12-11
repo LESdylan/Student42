@@ -6,11 +6,15 @@
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:53:02 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/12/10 12:53:03 by dyl-syzygy       ###   ########.fr       */
+/*   Updated: 2024/12/10 18:35:52 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <math.h>
+/**
+ * !it doesn't acknowledge the rounding number near the if it's superior or not from the half
+ */
 // version iterative
 /*
 int ft_sqrt(int nb)

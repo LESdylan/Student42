@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   isprint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dylan-soul <dylan-soul@student.42.fr>      +#+  +:+       +#+        */
+/*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:06:43 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/09/19 16:15:25 by dylan-soul       ###   ########.fr       */
+/*   Created: 2024/12/10 11:27:40 by dyl-syzygy        #+#    #+#             */
+/*   Updated: 2024/12/10 11:27:42 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
-{
-	if (c >= 0x20 && c <= 0x7E)
-		return (1);
-	return (0);
+#include <stdio.h>
+
+int isprint(char c) {
+    return (c >= 32 && c <= 126);
+}
+
+// Test function
+int main() {
+    char test_char = 'A';
+    printf("isprint('%c') = %d\n", test_char, isprint(test_char)); // Should print 1
+    test_char = ' ';
+    printf("isprint('%c') = %d\n", test_char, isprint(test_char)); // Should print 1
+    test_char = '\n';
+    printf("isprint('%c') = %d\n", test_char, isprint(test_char)); // Should print 0
+    return 0;
 }

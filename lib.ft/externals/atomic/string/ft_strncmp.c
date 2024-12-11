@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:07:11 by dylan-soul        #+#    #+#             */
-/*   Updated: 2024/12/10 11:47:43 by dyl-syzygy       ###   ########.fr       */
+/*   Created: 2024/12/10 11:52:48 by dyl-syzygy        #+#    #+#             */
+/*   Updated: 2024/12/10 11:52:50 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ int ft_strncmp(const char *s1, const char *s2, size_t n) {
 
 // Test function
 int main() {
-    const char *str1 = "Hello, World!";
-    const char *str2 = "Hello, World!";
-    
-    if (ft_strncmp(str1, str2, 5) == 0) {
-        printf("First 5 characters are equal\n");
+    const char *str1 = "apple";
+    const char *str2 = "apricot";
+    int result = ft_strncmp(str1, str2, 3);  // Compare first 3 characters
+    if (result < 0) {
+        printf("\"%s\" is less than \"%s\"\n", str1, str2);
+    } else if (result > 0) {
+        printf("\"%s\" is greater than \"%s\"\n", str1, str2);
     } else {
-        printf("First 5 characters are not equal\n");
+        printf("\"%s\" is equal to \"%s\"\n", str1, str2);
     }
-
     return 0;
 }

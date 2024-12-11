@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlen.c                                           :+:      :+:    :+:   */
+/*   ft_modify_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyl-syzygy <dyl-syzygy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 11:52:42 by dyl-syzygy        #+#    #+#             */
-/*   Updated: 2024/12/10 11:52:43 by dyl-syzygy       ###   ########.fr       */
+/*   Created: 2024/12/10 18:21:55 by dyl-syzygy        #+#    #+#             */
+/*   Updated: 2024/12/10 18:22:00 by dyl-syzygy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-size_t ft_strlen(const char *str) {
-    size_t length = 0;
-    while (str[length] != '\0') {
-        length++;
+char modify_char(unsigned int index, char c)
+{
+    if (index % 2 == 0)
+    {
+        return (char)toupper((unsigned char)c);  // Convert to uppercase if index is even
     }
-    return length;
-}
-
-// Test function
-int main() {
-    const char *str = "Hello, World!";
-    printf("Length: %zu\n", ft_strlen(str));
-    return 0;
+    else
+    {
+        return (char)tolower((unsigned char)c);  // Convert to lowercase if index is odd
+    }
 }
